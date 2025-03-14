@@ -1,0 +1,10 @@
+<%= turbo_stream_from @chat %>
+
+<div id="messages">
+  <%= render @chat.messages %>
+</div>
+
+<%= form_with(url: ask_chat_path(@chat), method: :post) do |f| %>
+  <%= f.text_area :message %>
+  <%= f.submit "Send" %>
+<% end %>

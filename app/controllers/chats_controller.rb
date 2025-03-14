@@ -25,9 +25,9 @@ class ChatsController < ApplicationController
 
   # GET /chats/new
   def new
-    # chat = current_user.chats.create!
-    #
-    # redirect_to chat_path(chat)
+    chat = Current.user.chats.create!
+
+    redirect_to chat_path(chat)
   end
 
   # GET /chats/1/edit

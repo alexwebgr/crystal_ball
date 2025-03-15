@@ -1,3 +1,3 @@
 class Message < ApplicationRecord
-  acts_as_message
+  # acts_as_message
 end

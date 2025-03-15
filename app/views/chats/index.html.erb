@@ -1,11 +1,8 @@
-<h1>Chats</h1>
+<h2>Chats</h2>
 
 <div id="chats">
   <% @chats.each do |chat| %>
-    <%= render chat %>
-    <p>
-      <%= link_to "Show this chat", chat %>
-    </p>
+    <%= link_to chat.label || "Show", chat %>
   <% end %>
 </div>
 

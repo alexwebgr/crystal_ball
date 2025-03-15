@@ -1,0 +1,10 @@
+<%= tag.div id: dom_id(message), class: "fixed-grid has-4-cols" do %>
+  <div class="grid">
+    <div class="cell">
+      <%= message.query_string %>
+    </div>
+    <div class="cell is-col-span-3">
+      <%= message.content&.html_safe %>
+    </div>
+  </div>
+<% end %>

@@ -1,5 +1,8 @@
-<%= form_with(model: chat) do |form| %>
-  <div>
-    <%= form.submit %>
-  </div>
+<%= form_with(url: ask_chat_path(chat), method: :post) do |f| %>
+  <%= f.text_field :message,
+    class: "input is-primary",
+    placeholder: "Ask anything",
+    required: true
+  %>
+  <%= f.submit "Send", class: "button is-primary is-hidden" %>
 <% end %>

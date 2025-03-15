@@ -1,0 +1,29 @@
+p:first-child {
+  margin-top: 0;
+}
+p {
+  margin: 10px 0 5px;
+}
+
+ul, ol {
+  list-style: initial;
+
+  li {
+    margin: 5px 0 0 15px;
+
+    li {
+      margin: 5px 0 0 30px;
+    }
+  }
+}
+
+.ask_form {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+#messages {
+  padding-bottom: 100px;
+}

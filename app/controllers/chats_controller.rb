@@ -3,25 +3,24 @@ class ChatsController < ApplicationController
 
   # GET /chats
   def index
-    @chats = Chat.all
+    @chats = Current.user.chats.order(created_at: :desc)
   end
 
   # GET /chats/1
   def show
   end
 
-  # def ask
-  #   @chat = Chat.find(params[:id])
-  #
-  #   # Use a background job to avoid blocking
-  #   ChatJob.perform_later(@chat.id, params[:message])
-  #
-  #   # Let the user know we're working on it
-  #   respond_to do |format|
-  #     format.turbo_stream
-  #     format.html { redirect_to @chat }
-  #   end
-  # end
+  def ask
+    @chat = Chat.find(params[:id])
+
+    # Use a background job to avoid blocking
+    ChatJob.perform_later(@chat.id, params[:message])
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @chat }
+    end
+  end
 
   # GET /chats/new
   def new
@@ -52,7 +51,7 @@ class ChatsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chat
-      @chat = Chat.find(params.expect(:id))
+      @chat = Current.user.chats.where(id: params.expect(:id)).first
     end
 
     # Only allow a list of trusted parameters through.

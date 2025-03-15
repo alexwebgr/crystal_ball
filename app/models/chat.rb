@@ -1,5 +1,9 @@
 class Chat < ApplicationRecord
-  acts_as_chat
+  has_many :messages,
+    -> { order(created_at: :asc) },
+    dependent: :destroy
 
+  # acts_as_chat
+  #
   broadcasts_to ->(chat) { "chat_#{chat.id}" }
 end

@@ -6,9 +6,9 @@ class ChatJob < ApplicationJob
 
     message_model = chat.messages.create!(query_string: message)
 
-    Turbo::StreamsChannel.broadcast_append_to(
-      "chat",
-      target: "messages-container",
+    Turbo::StreamsChannel.broadcast_prepend_to(
+      chat,
+      target: "messages",
       partial: "messages/message",
       locals: { message: message_model }
     )
@@ -26,13 +26,12 @@ class ChatJob < ApplicationJob
     # )
 
     sleep 3
+    message_model.update!(content: "chunk.content")
     Turbo::StreamsChannel.broadcast_append_to(
-      "chat",
+      chat,
       target: "message_#{message_model.id}_content",
-      html: "chunk.content"
+      html: message_model.content
     )
-
-    message_model.update(content: "chunk.content")
 
     # rescue RubyLLM::ServiceUnavailableError => e
     #   puts "\n ServiceUnavailableError: #{e.message}"

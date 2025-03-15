@@ -1,6 +1,6 @@
 class Chat < ApplicationRecord
   has_many :messages,
-    -> { order(created_at: :asc) },
+    -> { order(created_at: :desc) },
     dependent: :destroy
 
   # acts_as_chat

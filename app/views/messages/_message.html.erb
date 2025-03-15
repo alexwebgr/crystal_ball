@@ -3,7 +3,7 @@
     <div class="cell">
       <%= message.query_string %>
     </div>
-    <div class="cell is-col-span-3">
+    <div class="cell is-col-span-3" id="<%= dom_id(message) %>_content">
       <%= message.content&.html_safe %>
     </div>
   </div>

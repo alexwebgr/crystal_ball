@@ -1,7 +1,8 @@
-<%= turbo_stream_from @chat %>
-<div id="<%= dom_id @chat %>">
-  xxx
+<div id="messages-container">
+  <%= turbo_stream_from :chat %>
+  <%= turbo_frame_tag "chat" %>
 </div>
+
 <div id="messages">
   <%= render @chat.messages %>
 </div>

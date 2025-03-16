@@ -5,13 +5,21 @@ class ChatJob < ApplicationJob
     chat = Chat.find_by(id: chat_id)
 
     message_model = chat.messages.create!(query_string: message)
-
     Turbo::StreamsChannel.broadcast_prepend_to(
       chat,
       target: "messages",
       partial: "messages/message",
       locals: { message: message_model }
     )
+
+    if chat.label.nil?
+      chat.update(label: message_model.query_string)
+      Turbo::StreamsChannel.broadcast_update_to(
+        chat,
+        target: "chat_#{chat.id}_label",
+        html: message_model.query_string
+      )
+    end
 
     # chat_llm = RubyLLM.chat(model: 'gemini-2.0-flash')
     # final_message = chat_llm.ask(message)

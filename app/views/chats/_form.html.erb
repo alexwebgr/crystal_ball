@@ -1,8 +1,17 @@
-<%= form_with(url: ask_chat_path(chat), method: :post) do |f| %>
-  <%= f.text_field :message,
-    class: "input is-primary",
-    placeholder: "Ask anything",
-    required: true
-  %>
-  <%= f.submit "Send", class: "button is-primary is-hidden" %>
-<% end %>
+<div class="fixed-grid has-4-cols">
+  <div class="grid">
+    <div class="cell">
+    </div>
+
+    <div class="cell is-col-span-3">
+      <%= form_with(url: ask_chat_path(chat), method: :post) do |f| %>
+        <%= f.text_field :message,
+          class: "input is-primary",
+          placeholder: "Ask anything",
+          required: true
+        %>
+        <%= f.submit "Send", class: "button is-primary is-hidden" %>
+      <% end %>
+    </div>
+  </div>
+</div>

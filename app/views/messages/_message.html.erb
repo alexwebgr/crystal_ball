@@ -1,8 +1,9 @@
 <%= tag.div id: dom_id(message) do %>
-  <div>
+  <div class="box is-size-5 ml-5 has-text-primary has-background-black-ter is-float-left mb-1">
     <%= message.query_string %>
   </div>
-  <div id="<%= dom_id(message) %>_content">
+  <div class="is-clear-both"></div>
+  <div id="<%= dom_id(message) %>_content" class="ml-2 mr-6 p-2 px-4 mb-4">
     <%= message.content&.html_safe %>
   </div>
 <% end %>

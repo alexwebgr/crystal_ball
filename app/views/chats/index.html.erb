@@ -1,9 +1,0 @@
-<h2>Chats</h2>
-
-<div id="chats">
-  <% @chats.each do |chat| %>
-    <%= link_to chat.label || "Show", chat %>
-  <% end %>
-</div>
-
-<%= link_to "New chat", new_chat_path, class: "button is-primary" %>

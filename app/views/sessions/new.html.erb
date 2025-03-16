@@ -1,7 +1,7 @@
 <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
 <%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
 
-<%= form_with url: session_path do |form| %>
+<%= form_with url: session_path, class: "mb-2" do |form| %>
   <div class="field">
     <p class="control has-icons-left has-icons-right">
       <%= form.email_field :email_address,
@@ -34,9 +34,6 @@
       <%= form.submit "Sign in", class: "button is-primary" %>
     </p>
   </div>
-
 <% end %>
-<br>
 
-<%= link_to "Register", new_registration_path %>
 <%= link_to "Forgot password?", new_password_path %>

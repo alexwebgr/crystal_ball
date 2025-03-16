@@ -1,9 +1,49 @@
 <%= turbo_stream_from @chat %>
 
-<div id="messages">
-  <%= render @chat.messages %>
+<div class="fixed-grid has-4-cols">
+  <div class="grid">
+    <div class="cell has-background-black-ter">
+      <%= link_to chats_path, class: "" do %>
+        <%= image_tag "crystal_ball_200_80.png", width: 100 %>
+        Crystal Ball
+      <% end %>
+      <div class="px-2 py-4">
+        <%= link_to "New chat", new_chat_path, class: "button is-primary is-dark is-fullwidth is-outlined" %>
+      </div>
+
+      <aside class="menu">
+        <ul class="menu-list">
+          <li>
+            <a>Recent chats</a>
+            <ul>
+              <% @chats.each do |chat| %>
+                <li>
+                  <%= link_to chat.label || "Show", chat %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="cell is-col-span-3">
+      <div id="messages">
+        <%= render @chat.messages %>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="ask_form" id="ask_form">
-  <%= render "form", chat: @chat %>
+  <div class="fixed-grid has-4-cols">
+    <div class="grid">
+      <div class="cell">
+      </div>
+
+      <div class="cell is-col-span-3">
+        <%= render "form", chat: @chat %>
+      </div>
+    </div>
+  </div>
 </div>

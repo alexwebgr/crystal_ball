@@ -8,6 +8,7 @@ class ChatsController < ApplicationController
 
   # GET /chats/1
   def show
+    @chats = Current.user.chats.order(created_at: :desc).first(5)
   end
 
   def ask

@@ -13,5 +13,6 @@
     "@hotwired/turbo-rails": "^8.0.13",
     "bulma": "^1.0.3",
     "sass": "^1.85.1"
-  }
+  },
+  "packageManager": "yarn@1.22.22"
 }

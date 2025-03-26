@@ -21,20 +21,18 @@ class ChatJob < ApplicationJob
       )
     end
 
-    # chat_llm = RubyLLM.chat(model: 'gemini-2.0-flash')
-    # final_message = chat_llm.ask(message)
-    #
-    # markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true, underline: false, no_intra_emphasis: true)
-    # message_model.update(content: markdown.render(final_message.content))
+    chat_llm = RubyLLM.chat(model: 'gemini-2.0-flash')
+    final_message = chat_llm.ask(message)
 
-    # Turbo::StreamsChannel.broadcast_append_to(
-    #   "chat",
-    #   target: "message_#{message_model.id}_content",
-    #   html: message_model.content
-    # )
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true, underline: false, no_intra_emphasis: true)
+    message_model.update(content: markdown.render(final_message.content))
 
-    sleep 3
-    message_model.update!(content: "chunk.content")
+    Turbo::StreamsChannel.broadcast_append_to(
+      "chat",
+      target: "message_#{message_model.id}_content",
+      html: message_model.content
+    )
+
     Turbo::StreamsChannel.broadcast_append_to(
       chat,
       target: "message_#{message_model.id}_content",

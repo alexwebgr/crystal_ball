@@ -32,22 +32,14 @@ class MessageHandlerService
   end
 
   def update_message_content
-    # markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true, underline: false, no_intra_emphasis: true)
-    #
-    # message.update(content: markdown.render(ask_llm.content))
-
-    sleep 4
-    message.update(content: "markdown.render(ask_llm.content)")
+    bot = GeminiBotFactory.new(query_string)
+    # bot = TestBotFactory.new(query_string)
+    message.update(content: bot.ask)
 
     Turbo::StreamsChannel.broadcast_append_to(
       chat,
       target: "message_#{message.id}_content",
       html: message.content
     )
-  end
-
-  def ask_llm(model = 'gemini-2.0-flash')
-    chat_llm = RubyLLM.chat(model: model)
-    chat_llm.ask(message.query_string)
   end
 end

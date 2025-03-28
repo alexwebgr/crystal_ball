@@ -12,6 +12,9 @@ class ChatJob < ApplicationJob
       message_handler.update_message_content
     end
 
+  rescue StandardError => e
+    p e
+    progress_loader&.create_loader&.hide
     # rescue RubyLLM::ServiceUnavailableError => e
     #   puts "\n ServiceUnavailableError: #{e.message}"
     # rescue RubyLLM::RateLimitError => e

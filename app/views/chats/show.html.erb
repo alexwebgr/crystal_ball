@@ -1,5 +1,6 @@
 <%= turbo_stream_from @chat %>
 
+<div id="loader"></div>
 <div id="messages">
   <%= render @chat.messages %>
 </div>

@@ -1,5 +1,5 @@
 class ChatsController < ApplicationController
-  before_action :set_chat, only: %i[ show edit update destroy ]
+  before_action :set_chat, only: %i[ show edit update destroy ask ]
 
   # GET /chats
   def index
@@ -10,8 +10,6 @@ class ChatsController < ApplicationController
   end
 
   def ask
-    @chat = Chat.find(params[:id])
-
     # Use a background job to avoid blocking
     ChatJob.perform_later(@chat.id, params[:message])
 
@@ -50,7 +48,7 @@ class ChatsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chat
-      @chat = Current.user.chats.where(id: params.expect(:id)).first
+      @chat = Current.user.chats.find_by(id: params[:id])
     end
 
     # Only allow a list of trusted parameters through.

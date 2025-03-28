@@ -22,5 +22,4 @@ class ChatJob < ApplicationJob
     # rescue RubyLLM::ServiceUnavailableError => e
     #   puts "\n BadRequestError: #{e.message}"
   end
-
 end

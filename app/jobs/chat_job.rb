@@ -12,14 +12,19 @@ class ChatJob < ApplicationJob
       message_handler.update_message_content
     end
 
-  rescue StandardError => e
-    p e
+  rescue RubyLLM::ServiceUnavailableError,
+         RubyLLM::RateLimitError,
+         RubyLLM::BadRequestError,
+         StandardError => e
+    Turbo::StreamsChannel.broadcast_append_to(
+      chat,
+      target: "toast-container",
+      partial: "messages/toast",
+      locals: {
+        message: e.message,
+        type: "danger"
+      }
+    )
     progress_loader&.create_loader&.hide
-    # rescue RubyLLM::ServiceUnavailableError => e
-    #   puts "\n ServiceUnavailableError: #{e.message}"
-    # rescue RubyLLM::RateLimitError => e
-    #   puts "\n RateLimitError: #{e.message}"
-    # rescue RubyLLM::ServiceUnavailableError => e
-    #   puts "\n BadRequestError: #{e.message}"
   end
 end

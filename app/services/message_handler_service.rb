@@ -32,8 +32,8 @@ class MessageHandlerService
   end
 
   def update_message_content
-    # bot = GeminiBotFactory.new(query_string)
-    bot = TestBotFactory.new(query_string)
+    bot = GeminiBotFactory.new(query_string)
+    # bot = TestBotFactory.new(query_string)
     message.update(content: bot.ask)
 
     Turbo::StreamsChannel.broadcast_append_to(

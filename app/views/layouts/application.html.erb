@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" class="is-overflow-hidden">
   <head>
+    <%= toast_css_variables %>
+
     <title><%= content_for(:title) || "Crystal Ball" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -18,8 +20,10 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "faw_toast", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <%= javascript_include_tag "faw_toast", "data-turbo-track": "reload" %>
   </head>
 
   <body>
@@ -97,5 +101,6 @@
         <%= yield %>
       </div>
     </div>
+    <%= toast_container %>
   </body>
 </html>

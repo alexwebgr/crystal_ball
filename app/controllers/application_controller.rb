@@ -28,9 +28,4 @@ class ApplicationController < ActionController::Base
       format.json { render json: { message: exception.message }, status: :unprocessable_entity }
     end
   end
-
-  def render_message(flash_type = :success, status = :ok, message = nil)
-    flash.now[flash_type] = message
-    render turbo_stream: turbo_stream.append("toast-frame", partial: "partials/toast_container"), status: status
-  end
 end

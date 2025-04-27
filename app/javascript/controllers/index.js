@@ -4,11 +4,6 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
 import ResetFormController from "./reset_form_controller";
 application.register("reset_form", ResetFormController)
 
-import ToastController from "./toast_controller"
-application.register("toast", ToastController)

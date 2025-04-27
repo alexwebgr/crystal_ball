@@ -18,8 +18,8 @@ class ChatJob < ApplicationJob
          StandardError => e
     Turbo::StreamsChannel.broadcast_append_to(
       chat,
-      target: "toast-container",
-      partial: "messages/toast",
+      target: "faw-toast-container",
+      partial: "faw_toast/toast",
       locals: {
         message: e.message,
         type: "danger"
